@@ -8,8 +8,8 @@ import {
   refreshTokenReuseTimeout,
 } from '../../../config/jwt';
 import { User } from './user.entity';
-import { UserAuthToken } from './userAuthToken.entity';
-import { TokenType } from './userAuthToken.fields';
+import { UserAuthToken } from './userAuthToken/userAuthToken.entity';
+import { TokenType } from './userAuthToken/userAuthToken.fields';
 
 @Injectable()
 export class UserTokensService {

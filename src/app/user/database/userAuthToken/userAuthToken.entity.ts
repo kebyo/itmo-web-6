@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { User } from './user.entity';
+import { User } from '../user.entity';
 import { UserAuthTokenFields } from './userAuthToken.fields';
 
 /**
@@ -24,9 +24,6 @@ export class UserAuthToken extends UserAuthTokenFields {
 
   @Column({ type: 'int' })
   user_id: number;
-
-  @Column({ type: 'jsonb', nullable: true })
-  device_metadata: any;
 
   @CreateDateColumn({ type: 'timestamptz', nullable: true })
   created_at?: Date;
