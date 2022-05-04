@@ -2,19 +2,24 @@ import 'dotenv/config';
 
 import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { tryNumber } from '@proscom/ui-utils';
+import * as process from 'process';
 
-import { typeormBaseDirectory } from './environment';
-import { booleanEnv } from './tools';
-
-console.info(
-  `TypeORM configuration uses base directory '${typeormBaseDirectory}' in ${__filename}`,
-);
 
 export const typeormHost = process.env.TYPEORM_HOST;
 export const typeormPort = tryNumber(process.env.TYPEORM_PORT, 5432);
 export const typeormUser = process.env.TYPEORM_USERNAME;
 export const typeormPassword = process.env.TYPEORM_PASSWORD;
 export const typeormDatabase = process.env.TYPEORM_DATABASE;
+
+// TypeORM переменные
+export const typeormBaseDirectory =
+  process.env.TYPEORM_BASE_DIRECTORY || 'dist';
+
+
+console.info(
+  `TypeORM configuration uses base directory '${typeormBaseDirectory}' in ${__filename}`,
+);
+
 
 export const ormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -29,10 +34,8 @@ export const ormConfig: TypeOrmModuleOptions = {
   cli: {
     migrationsDir: `${typeormBaseDirectory}/migrations`,
   },
-  logging: booleanEnv(process.env.DEBUG_SQL),
+  logging: false,
   uuidExtension: 'uuid-ossp',
   installExtensions: true,
 };
-
-// для того, чтобы работал скрипт build:diagram
 export default ormConfig;
